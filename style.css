@@ -27,3 +27,8 @@ section {
   height: auto;           /* garde les proportions */
   border-radius: 50%;     /* optionnel : image ronde */
 }
+
+
+.presentation .texte {
+  max-width: 700px;       /* largeur max du texte */
+}
