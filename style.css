@@ -16,3 +16,14 @@ section {
   width: 80%;
   max-width: 800px;
 }
+.presentation {
+  display: flex;          /* aligne horizontalement l'image et le texte */
+  align-items: flex-start; /* aligne le haut de l'image et du texte */
+  gap: 20px;              /* espace entre l'image et le texte */
+}
+
+.presentation img {
+  width: 150px;           /* largeur de l'image */
+  height: auto;           /* garde les proportions */
+  border-radius: 50%;     /* optionnel : image ronde */
+}
