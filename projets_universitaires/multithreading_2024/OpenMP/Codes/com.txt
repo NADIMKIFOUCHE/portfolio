@@ -1,0 +1,56 @@
+Non, il n'est pas recommandé que chaque thread ouvre un fichier avec son propre curseur dans OpenMP ou dans des applications parallèles en général. Cela peut créer plusieurs problèmes :
+
+    Accès concurrent au fichier : Si plusieurs threads tentent de lire le fichier en même temps avec leurs propres curseurs, il y a des risques de conflits d'accès. Par exemple, plusieurs threads pourraient essayer de lire ou d'écrire dans le fichier en même temps, ce qui pourrait entraîner des résultats non déterministes, des corruptions de données, ou des erreurs de synchronisation.
+
+    Verrouillage et performance : Si chaque thread tente de lire le fichier, il peut être nécessaire de verrouiller l'accès au fichier, ce qui ajoute de la surcharge et peut potentiellement réduire les bénéfices de la parallélisation. La gestion des verrous (mutex, etc.) peut être complexe et coûteuse en termes de performance, surtout si le fichier est volumineux.
+
+Alternatives possibles
+
+    Lecture séquentielle par un seul thread : La solution la plus simple et la plus courante consiste à ouvrir le fichier une seule fois dans le code principal, puis à lire les données de manière séquentielle. Une fois les données lues, vous pouvez les répartir entre les threads.
+
+    Par exemple :
+
+std::vector<int> file_data((nb_lignes + 1) * nb_cols);
+
+// Ouverture du fichier une seule fois
+std::ifstream f("data.txt");
+
+// Lecture séquentielle des données dans le fichier
+for (int i = 0; i < (nb_lignes) * nb_cols; i++) {
+    f >> file_data[i];
+}
+
+// Ensuite, vous pouvez paralléliser d'autres opérations sur 'file_data'
+#pragma omp parallel for
+for (int i = 0; i < nb_lignes; i++) {
+    // Opérations parallèles sur 'file_data'
+}
+
+Partitionnement du fichier et lecture par plusieurs threads : Une autre approche consiste à partitionner les données et permettre à chaque thread de lire une portion du fichier. Par exemple, vous pourriez diviser le fichier en segments égaux, chaque thread lisant une section du fichier, en utilisant des positions de départ et de fin. Cependant, cette méthode nécessite une certaine coordination, notamment pour gérer le pointeur de lecture et s'assurer que chaque thread lit une section distincte sans chevauchement.
+
+Voici un exemple qui pourrait fonctionner, avec une lecture des données répartie entre plusieurs threads :
+
+    std::vector<int> file_data((nb_lignes + 1) * nb_cols);
+
+    // Ouvrir le fichier une seule fois
+    std::ifstream f("data.txt");
+
+    // Diviser la tâche de lecture entre les threads
+    #pragma omp parallel for
+    for (int i = 0; i < nb_lignes; i++) {
+        // Chaque thread lit une portion du fichier
+        for (int j = 0; j < nb_cols; j++) {
+            // Le thread lit la donnée correspondante en fonction de l'indice (i, j)
+            int index = i * nb_cols + j;
+            f >> file_data[index];
+        }
+    }
+
+    Attention : Le code ci-dessus est incorrect, car plusieurs threads tenteraient de lire à partir du fichier en même temps, ce qui peut provoquer des conflits. Pour garantir que chaque thread lit une portion du fichier distincte, vous devrez gérer les positions de lecture avec des mécanismes comme seekg pour déplacer le curseur du fichier, mais cela peut rendre le code complexe et sujet à erreurs.
+
+    Préchargement du fichier avant la parallélisation : Une approche efficace consiste à charger tout le fichier dans un tableau (ou std::vector) séquentiellement avant de paralléliser d'autres opérations sur ces données. Une fois les données en mémoire, vous pouvez les manipuler en parallèle sans aucun problème de gestion de fichiers.
+
+Conclusion :
+
+Il est préférable de lire le fichier séquentiellement dans un seul thread avant de paralléliser les traitements sur les données chargées. Chaque thread peut ensuite travailler sur des parties distinctes des données déjà en mémoire, ce qui évite la complexité et les risques liés à l'accès concurrent au fichier.
+
