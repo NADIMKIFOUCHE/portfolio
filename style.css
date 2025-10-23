@@ -7,14 +7,14 @@ body {
 }
 header, footer {
   text-align: center;
-  background: #007acc;
+  background: #063250;
   color: white;
   padding: 1rem;
 }
 section {
   margin: 2rem auto;
   width: 80%;
-  max-width: 800px;
+  max-width: 1600px;
 }
 .presentation {
   display: flex;          /* aligne horizontalement l'image et le texte */
@@ -25,10 +25,10 @@ section {
 .presentation img {
   width: 150px;           /* largeur de l'image */
   height: auto;           /* garde les proportions */
-  border-radius: 50%;     /* optionnel : image ronde */
+      /* optionnel : image ronde */
 }
 
 
 .presentation .texte {
-  max-width: 700px;       /* largeur max du texte */
+  max-width: 1300px;       /* largeur max du texte */
 }
