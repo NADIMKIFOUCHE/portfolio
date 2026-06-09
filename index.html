@@ -498,12 +498,8 @@ footer {
     </div>
     <div class="hero-right">
       <div class="hero-stat">
-        <div class="stat-num">24</div>
+        <div class="stat-num" id="age"></div>
         <div class="stat-label">ans</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-num">M2</div>
-        <div class="stat-label">niveau</div>
       </div>
       <div class="avail-pill"><span class="dot"></span>Disponible</div>
     </div>
@@ -578,16 +574,12 @@ footer {
   <h2>Qui suis-je ?</h2>
   <div class="about-cols">
     <div class="about-body">
+      <img src="image.jpg" alt="Nadim Kifouche" style="width:120px;height:120px;object-fit:cover;border-radius:50%;margin-bottom:24px;border:2px solid var(--line2);display:block;">
       <p>
-        J'ai 24 ans et je suis passionné par les systèmes IA qui fonctionnent vraiment.
+        J'ai <span id="age2"></span> ans et je suis passionné par les systèmes IA qui fonctionnent vraiment.
         Mon obsession : aller au-delà du prototype — concevoir des architectures
         <strong>multi-agents robustes</strong>, des pipelines RAG efficaces,
         des systèmes qu'on peut déployer et maintenir sans tout reconstruire.
-      </p>
-      <p>
-        Actuellement en <strong>Master 2 ARIAS</strong> à l'Université d'Orléans,
-        spécialisé en IA, architecture logicielle et MLOps. Stage chez EY France
-        où j'ai travaillé sur des environnements de production à contraintes fortes.
       </p>
       <p>
         En dehors du code : sport, défis techniques, et curiosité permanente
@@ -606,10 +598,6 @@ footer {
       <div class="aside-row">
         <span class="aside-key">Focus</span>
         <span class="aside-val">LLMs · Agents · RAG</span>
-      </div>
-      <div class="aside-row">
-        <span class="aside-key">Expérience</span>
-        <span class="aside-val">Stage EY France 2024</span>
       </div>
       <div class="aside-row">
         <span class="aside-key">Statut</span>
@@ -706,5 +694,14 @@ footer {
   </div>
 </footer>
 
+<script>
+  const birth = new Date(2001, 3, 6);
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+  document.getElementById('age').textContent = age;
+  document.getElementById('age2').textContent = age;
+</script>
 </body>
 </html>
