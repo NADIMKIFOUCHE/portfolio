@@ -1,79 +1,710 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - Nadim Kifouche</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nadim Kifouche</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+:root {
+  --ink: #0A0A0F;
+  --ink2: #14141C;
+  --ink3: #1C1C28;
+  --line: rgba(255,255,255,0.07);
+  --line2: rgba(255,255,255,0.13);
+  --dim: #3A3A50;
+  --mid: #6B6B8A;
+  --soft: #A8A8C0;
+  --bright: #F0F0FA;
+  --acc: #C8C0FF;
+  --acc2: #9B8FFF;
+  --acc3: #6B5FE8;
+  --teal: #5FCFB0;
+  --mono: 'Space Mono', monospace;
+  --sans: 'Space Grotesk', sans-serif;
+}
+
+body {
+  background: var(--ink);
+  color: var(--bright);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--soft);
+  letter-spacing: 0.04em;
+}
+
+.logo b { color: var(--acc); font-weight: 700; }
+
+.nav-right {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.nav-right a {
+  font-size: 12px;
+  color: var(--dim);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.15s;
+}
+.nav-right a:hover { color: var(--soft); }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 6vw 10vh;
+  position: relative;
+}
+
+.bg-name {
+  position: absolute;
+  top: 50%;
+  left: 6vw;
+  transform: translateY(-60%);
+  font-family: var(--sans);
+  font-size: clamp(80px, 14vw, 180px);
+  font-weight: 600;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: flex-end;
+}
+
+.hero-left h1 {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 20px;
+  color: var(--bright);
+}
+
+.hero-left h1 em {
+  font-style: normal;
+  color: var(--acc);
+}
+
+.hero-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--teal);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--teal);
+  padding-bottom: 3px;
+}
+
+.hero-desc {
+  max-width: 500px;
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.75;
+  margin-bottom: 32px;
+}
+
+.hero-desc strong { color: var(--soft); font-weight: 500; }
+
+.hero-actions { display: flex; gap: 12px; }
+
+.btn-main {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 11px 22px;
+  background: var(--acc3);
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.btn-main:hover { background: var(--acc2); }
+
+.btn-line {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 11px 22px;
+  background: transparent;
+  color: var(--soft);
+  border: 1px solid var(--line2);
+  border-radius: 3px;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+.btn-line:hover { border-color: var(--acc); color: var(--acc); }
+
+.hero-right { text-align: right; padding-bottom: 4px; }
+
+.hero-stat { margin-bottom: 16px; }
+
+.stat-num {
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--bright);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.avail-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--teal);
+  border: 1px solid rgba(95,207,176,0.25);
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-top: 8px;
+}
+
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: blink 2.2s infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity:1; }
+  50% { opacity:0.3; }
+}
+
+/* MARQUEE */
+.marquee-wrap {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  animation: scroll 20s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-item {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--dim);
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marquee-item span { color: var(--acc3); font-size: 10px; }
+
+/* SECTIONS */
+.section {
+  padding: 100px 6vw;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.s-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--acc3);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 52px;
+  color: var(--bright);
+}
+
+/* PROJECT */
+.project-block {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 32px;
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+  align-items: start;
+}
+
+.project-block:last-child { border-bottom: 1px solid var(--line); }
+
+.p-index {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  padding-top: 5px;
+}
+
+.p-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: var(--bright);
+  transition: color 0.15s;
+}
+
+.project-block:hover .p-title { color: var(--acc); }
+
+.p-desc {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  max-width: 640px;
+}
+
+.p-quote {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--acc);
+  margin-bottom: 16px;
+  opacity: 0.8;
+  padding-left: 12px;
+  border-left: 2px solid var(--acc3);
+}
+
+.p-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.p-tag {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--soft);
+  background: var(--ink3);
+  border: 1px solid var(--line2);
+  padding: 2px 10px;
+  border-radius: 2px;
+}
+
+.p-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.p-link:hover { color: var(--acc); }
+
+/* ABOUT */
+.about-cols {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 64px;
+}
+
+.about-body p {
+  font-size: 15px;
+  color: var(--mid);
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+.about-body strong { color: var(--soft); font-weight: 500; }
+
+.about-aside { display: flex; flex-direction: column; gap: 1px; }
+
+.aside-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.aside-key {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.aside-val { font-size: 13px; color: var(--soft); text-align: right; }
+
+/* SKILLS */
+.skill-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  align-items: start;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.skill-row:last-child { border-bottom: 1px solid var(--line); }
+
+.sk-cat {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--acc3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-top: 3px;
+}
+
+.sk-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.sk-tag { font-size: 13px; color: var(--soft); padding: 4px 0; }
+.sk-tag::after { content: ' ·'; color: var(--dim); }
+.sk-tag:last-child::after { content: ''; }
+
+/* CONTACT */
+.contact-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-width: 560px;
+}
+
+.c-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  text-decoration: none;
+}
+.c-item:first-child { border-top: 1px solid var(--line); }
+
+.c-key {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.c-val { font-size: 14px; color: var(--soft); transition: color 0.15s; }
+.c-item:hover .c-val { color: var(--acc); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 28px 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--dim); }
+
+.footer-links { display: flex; gap: 20px; }
+.footer-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--soft); }
+
+@media (max-width: 640px) {
+  .hero-content { grid-template-columns: 1fr; }
+  .hero-right { text-align: left; }
+  .about-cols { grid-template-columns: 1fr; }
+  .skill-row { grid-template-columns: 1fr; gap: 10px; }
+  .project-block { grid-template-columns: 1fr; gap: 12px; }
+  .nav-right a:not(:last-child) { display: none; }
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Nadim Kifouche</h1>
-    <p>Étudiant en Master 2 ARIAS - Université d’Orléans | Spécialisation IA, Architecture & Sécurité Logicielle</p>
-  </header>
 
-  <section>
-    <div class="presentation">
-      <img src="./img/profil.jpeg" alt="Photo de profil" class="photo-profil">
-      <div class="texte">
-        <p>Bonjour, je m’appelle <strong>Nadim Kifouche</strong>, j’ai 24 ans. Passionné d’informatique, d’intelligence artificielle et de sport, j’aime relever de nouveaux défis.</p>
-        <p>Actuellement en <strong>Master 2 ARIAS</strong> (Applications Réparties, Intelligence Artificielle et Sécurité des Logiciels) à l’Université d’Orléans, je suis à la recherche d’un <strong>stage de 4 à 6 mois entre avril et septembre 2025</strong> dans les domaines de l’IA, du Machine Learning ou de la Data.</p>
-        <p>Passionné par les technologies avancées, la conception logicielle et l’IA, je dispose d’une large expertise informatique
-          couvrant plusieurs paradigmes de programmation et des compétences en algorithmique, architecture logicielle et gestion de données. Motivé
-          à contribuer à des projets innovants en IA et Data.</p>
-           <p>LIEN PORTFOLIO <a href="https://github.com/NADIMKIFOUCHE/portfolio/">ici.</a></p>
+<nav>
+  <div class="logo">NK<b>_</b></div>
+  <div class="nav-right">
+    <a href="#projects">Projets</a>
+    <a href="#about">À propos</a>
+    <a href="#contact">Contact</a>
+    <a href="https://github.com/NADIMKIFOUCHE" target="_blank" style="color:var(--acc3)">GitHub →</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="bg-name">NADIM<br>KIFOUCHE</div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-tag">Gen AI Engineer</div>
+      <h1>Je construis des systèmes<br>IA qui tiennent <em>en production.</em></h1>
+      <p class="hero-desc">
+        Prototyper un agent LLM, c'est facile. Le rendre <strong>fiable, observable et scalable</strong> —
+        c'est là que ça devient intéressant. M2 ARIAS · Université d'Orléans.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-main">Voir mes projets</a>
+        <a href="#contact" class="btn-line">Me contacter</a>
       </div>
     </div>
-  </section>
+    <div class="hero-right">
+      <div class="hero-stat">
+        <div class="stat-num">24</div>
+        <div class="stat-label">ans</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num">M2</div>
+        <div class="stat-label">niveau</div>
+      </div>
+      <div class="avail-pill"><span class="dot"></span>Disponible</div>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <a href="https://github.com/NADIMKIFOUCHE/portfolio/tree/main/experiences"><h2>Expériences professionnelles</h2></a>
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">LangChain <span>✦</span></div>
+    <div class="marquee-item">Multi-Agent Systems <span>✦</span></div>
+    <div class="marquee-item">RAG Pipelines <span>✦</span></div>
+    <div class="marquee-item">FastAPI <span>✦</span></div>
+    <div class="marquee-item">GCP <span>✦</span></div>
+    <div class="marquee-item">LLM Orchestration <span>✦</span></div>
+    <div class="marquee-item">Docker <span>✦</span></div>
+    <div class="marquee-item">Python <span>✦</span></div>
+    <div class="marquee-item">Pinecone <span>✦</span></div>
+    <div class="marquee-item">LangGraph <span>✦</span></div>
+    <div class="marquee-item">HuggingFace <span>✦</span></div>
+    <div class="marquee-item">BigQuery <span>✦</span></div>
+    <div class="marquee-item">LangChain <span>✦</span></div>
+    <div class="marquee-item">Multi-Agent Systems <span>✦</span></div>
+    <div class="marquee-item">RAG Pipelines <span>✦</span></div>
+    <div class="marquee-item">FastAPI <span>✦</span></div>
+    <div class="marquee-item">GCP <span>✦</span></div>
+    <div class="marquee-item">LLM Orchestration <span>✦</span></div>
+    <div class="marquee-item">Docker <span>✦</span></div>
+    <div class="marquee-item">Python <span>✦</span></div>
+    <div class="marquee-item">Pinecone <span>✦</span></div>
+    <div class="marquee-item">LangGraph <span>✦</span></div>
+    <div class="marquee-item">HuggingFace <span>✦</span></div>
+    <div class="marquee-item">BigQuery <span>✦</span></div>
+  </div>
+</div>
 
-    <article>
-      <a href="https://github.com/NADIMKIFOUCHE/portfolio/tree/main/experiences/ey_2023"><p><strong>Stage – EY France (La Défense) | Avril – Août 2024</strong></p></a>
-      <ul>
-        <li>Conception et déploiement d’un SIEM open source (WAZUH) pour la sécurisation d’un environnement de production dédié à un LAB de sensibilisation aux engagements environnementaux et sociaux d’EY.</li>
-        <li>Définition et mise en œuvre de politiques de sécurité réseau, incluant la configuration avancée de règles sur Firewall PALOALTO et FORTINET.</li>
-        <li>Administration et maintenance de serveurs physiques et virtuels.</li>
-        <li>Installation, câblage et configuration réseau de serveurs dans les différents Datacenters.</li>
-        <li>Rédaction d’un rapport de stage détaillant les solutions déployées et une documentation technique.</li>
-        <li>Familiarisation avec l’administration d’Active Directory (AD) : gestion des utilisateurs, groupes et stratégies de sécurité (GPO), participation à la maintenance de l’infrastructure réseau.  </li>
-      </ul>
-    </article>
+<div class="section" id="projects">
+  <div class="s-label">Projets</div>
+  <h2>Ce que j'ai construit</h2>
 
-    <a href="https://github.com/NADIMKIFOUCHE/portfolio/tree/main/projets_universitaires"><h2>Projets Universitaires</h2></a>
+  <div class="project-block">
+    <div class="p-index">001</div>
+    <div>
+      <div class="p-title">Système Multi-Agents</div>
+      <p class="p-desc">
+        Architecture agentique complète — coordination entre agents spécialisés, routage dynamique
+        de tâches, pipelines de décision autonome et tool-calling.
+        Focus sur la robustesse des décisions et la traçabilité des actions à chaque étape.
+      </p>
+      <div class="p-quote">La coordination inter-agents est triviale à prototyper, difficile à rendre déterministe.</div>
+      <div class="p-tags">
+        <span class="p-tag">Python</span>
+        <span class="p-tag">LangChain</span>
+        <span class="p-tag">Agents</span>
+        <span class="p-tag">Tool-calling</span>
+        <span class="p-tag">LLMs</span>
+      </div>
+      <a href="https://github.com/NADIMKIFOUCHE/Systeme_multi_agent_test" target="_blank" class="p-link">github.com/NADIMKIFOUCHE →</a>
+    </div>
+  </div>
 
-    <article>
-      <a href="https://github.com/NADIMKIFOUCHE/portfolio/tree/main/projets_universitaires/multithreading_2024"><p><strong>Projet M1 – Optimisation et parallélisation en C++ (2024)</strong></p></a>
-      <p>Étude et amélioration de programmes C++ fournis pour mettre en œuvre et comparer différentes approches de parallélisation (données partagées vs non partagées, utilisation des registres, OpenMP, MPI).</p>
-    </article>
+  <div class="project-block" style="opacity:0.4">
+    <div class="p-index">002</div>
+    <div>
+      <div class="p-title" style="color:var(--mid)">Prochain projet</div>
+      <p class="p-desc">En cours de construction. Bientôt disponible.</p>
+    </div>
+  </div>
+</div>
 
-    <article>
-      <a href="https://github.com/NADIMKIFOUCHE/portfolio/tree/main/projets_universitaires/clientserveur_2024"><p><strong>Projet L3 – Développement d’un serveur client/serveur en C++ (2024)</strong></p></a>
-      <p>Conception et développement d’un serveur/client en C++, implémentation et adaptation de l’algorithme de Fréchet, gestion de données volumineuses et communication inter-systèmes via la bibliothèque CBOR.</p>
-    </article>
+<div class="section" id="about" style="border-top:1px solid var(--line);">
+  <div class="s-label">À propos</div>
+  <h2>Qui suis-je ?</h2>
+  <div class="about-cols">
+    <div class="about-body">
+      <p>
+        J'ai 24 ans et je suis passionné par les systèmes IA qui fonctionnent vraiment.
+        Mon obsession : aller au-delà du prototype — concevoir des architectures
+        <strong>multi-agents robustes</strong>, des pipelines RAG efficaces,
+        des systèmes qu'on peut déployer et maintenir sans tout reconstruire.
+      </p>
+      <p>
+        Actuellement en <strong>Master 2 ARIAS</strong> à l'Université d'Orléans,
+        spécialisé en IA, architecture logicielle et MLOps. Stage chez EY France
+        où j'ai travaillé sur des environnements de production à contraintes fortes.
+      </p>
+      <p>
+        En dehors du code : sport, défis techniques, et curiosité permanente
+        pour tout ce qui bouge dans l'écosystème LLM.
+      </p>
+    </div>
+    <div class="about-aside">
+      <div class="aside-row">
+        <span class="aside-key">Formation</span>
+        <span class="aside-val">M2 ARIAS · Orléans</span>
+      </div>
+      <div class="aside-row">
+        <span class="aside-key">Lieu</span>
+        <span class="aside-val">France</span>
+      </div>
+      <div class="aside-row">
+        <span class="aside-key">Focus</span>
+        <span class="aside-val">LLMs · Agents · RAG</span>
+      </div>
+      <div class="aside-row">
+        <span class="aside-key">Expérience</span>
+        <span class="aside-val">Stage EY France 2024</span>
+      </div>
+      <div class="aside-row">
+        <span class="aside-key">Statut</span>
+        <span class="aside-val" style="color:var(--teal)">Disponible</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <article>
-      <a href="https://github.com/NADIMKIFOUCHE/portfolio/tree/main/projets_universitaires/poo_2023_rpg"><p><strong>Projet L3 – Jeu RPG en Java (2023)</strong></p></a>
-      <p>Conception d’un jeu RPG textuel en architecture MVC, intégrant une logique orientée objet complète et une interface dynamique en terminal.</p>
-    </article>
+<div class="section" id="skills" style="border-top:1px solid var(--line); padding-top:80px;">
+  <div class="s-label">Stack</div>
+  <h2>Technologies</h2>
+  <div>
+    <div class="skill-row">
+      <div class="sk-cat">AI & LLMs</div>
+      <div class="sk-tags">
+        <span class="sk-tag">LangChain</span>
+        <span class="sk-tag">LangGraph</span>
+        <span class="sk-tag">LlamaIndex</span>
+        <span class="sk-tag">OpenAI</span>
+        <span class="sk-tag">Anthropic</span>
+        <span class="sk-tag">Groq</span>
+        <span class="sk-tag">HuggingFace</span>
+        <span class="sk-tag">Ollama</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="sk-cat">Backend</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Python</span>
+        <span class="sk-tag">FastAPI</span>
+        <span class="sk-tag">Flask</span>
+        <span class="sk-tag">PostgreSQL</span>
+        <span class="sk-tag">MongoDB</span>
+        <span class="sk-tag">BigQuery</span>
+        <span class="sk-tag">Pinecone</span>
+        <span class="sk-tag">Redis</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="sk-cat">Cloud & DevOps</div>
+      <div class="sk-tags">
+        <span class="sk-tag">GCP</span>
+        <span class="sk-tag">Docker</span>
+        <span class="sk-tag">Kubernetes</span>
+        <span class="sk-tag">GitHub Actions</span>
+        <span class="sk-tag">Terraform</span>
+        <span class="sk-tag">MLflow</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="sk-cat">Frontend</div>
+      <div class="sk-tags">
+        <span class="sk-tag">React</span>
+        <span class="sk-tag">TypeScript</span>
+        <span class="sk-tag">Next.js</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <article>
-      <a href="https://github.com/NADIMKIFOUCHE/portfolio/tree/main/projets_universitaires/poo_2023_othello_awale"><p><strong>Projet L2 – Jeu Othello et Awalé en Java (2023)</strong></p></a>
-      <p>Conception en équipe des jeux de société Awalé et Othello en programmation orientée objet selon une architecture MVC.</p>
-    </article>
+<div class="section" id="contact" style="border-top:1px solid var(--line); padding-top:80px;">
+  <div class="s-label">Contact</div>
+  <h2>Travaillons ensemble</h2>
+  <p style="color:var(--mid); margin-bottom:40px; max-width:440px; font-size:15px;">
+    Ouvert aux opportunités en IA générative, systèmes agentiques ou MLOps.
+  </p>
+  <div class="contact-row">
+    <a href="mailto:nadim.kifouche@gmail.com" class="c-item">
+      <span class="c-key">Email</span>
+      <span class="c-val">nadim.kifouche@gmail.com</span>
+    </a>
+    <a href="https://linkedin.com/in/nadimkifouche" target="_blank" class="c-item">
+      <span class="c-key">LinkedIn</span>
+      <span class="c-val">linkedin.com/in/nadimkifouche</span>
+    </a>
+    <a href="https://github.com/NADIMKIFOUCHE" target="_blank" class="c-item">
+      <span class="c-key">GitHub</span>
+      <span class="c-val">github.com/NADIMKIFOUCHE</span>
+    </a>
+    <a href="tel:+33695009086" class="c-item">
+      <span class="c-key">Téléphone</span>
+      <span class="c-val">+33 6 95 00 90 86</span>
+    </a>
+  </div>
+</div>
 
-    <article>
-      <a href="https://github.com/NADIMKIFOUCHE/portfolio/tree/main/projets_universitaires/web_2022"><p><strong>Projet L2 – Développement Web (2022)</strong></p></a>
-      <p>Création en équipe d’un site web pour une clinique, développé en PHP et JavaScript selon une architecture MVC.</p>
-    </article>
+<footer>
+  <span class="footer-copy">© 2025 Nadim Kifouche</span>
+  <div class="footer-links">
+    <a href="https://github.com/NADIMKIFOUCHE" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/nadimkifouche" target="_blank">LinkedIn</a>
+    <a href="mailto:nadim.kifouche@gmail.com">Email</a>
+  </div>
+</footer>
 
-  <footer>
-    <p> <a href="mailto:nadim.kifouche@gmail.com">nadim.kifouche@gmail.com</a> |
-       <a href="https://www.linkedin.com/in/nadimkifouche" target="_blank">LinkedIn</a> |
-       <a href="https://github.com/NadimKifouche" target="_blank">GitHub</a> |
-        +33 6 95 00 90 86
-    </p>
-  </footer>
 </body>
 </html>
