@@ -1,827 +1,413 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nadim Kifouche</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nadim Kifouche — AI Engineer</title>
+<meta name="description" content="Nadim Kifouche, AI Engineer. Agents LLM, RAG, développement full-stack. Disponible à partir d'octobre 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
 
-:root {
-  --ink: #0A0A0F;
-  --ink2: #14141C;
-  --ink3: #1C1C28;
-  --line: rgba(255,255,255,0.07);
-  --line2: rgba(255,255,255,0.13);
-  --dim: #3A3A50;
-  --mid: #6B6B8A;
-  --soft: #A8A8C0;
-  --bright: #F0F0FA;
-  --acc: #C8C0FF;
-  --acc2: #9B8FFF;
-  --acc3: #6B5FE8;
-  --teal: #5FCFB0;
-  --mono: 'Space Mono', monospace;
-  --sans: 'Space Grotesk', sans-serif;
-}
 
-body {
-  background: var(--ink);
-  color: var(--bright);
-  font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.7;
-  overflow-x: hidden;
-}
 
-/* NAV */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 20px 6vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.logo {
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--soft);
-  letter-spacing: 0.04em;
-}
 
-.logo b { color: var(--acc); font-weight: 700; }
 
-.nav-right {
-  display: flex;
-  gap: 28px;
-  align-items: center;
-}
 
-.nav-right a {
-  font-size: 12px;
-  color: var(--dim);
-  text-decoration: none;
-  letter-spacing: 0.05em;
-  transition: color 0.15s;
-}
-.nav-right a:hover { color: var(--soft); }
 
-/* HERO */
-#hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 120px 8vw 80px;
-  position: relative;
-}
 
-.hero-inner {
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 80px;
-  align-items: center;
-}
 
-/* Photo frame */
-.hero-photo-wrap {
-  position: relative;
-  width: 300px;
-  flex-shrink: 0;
-}
 
-.hero-photo-wrap img {
-  width: 100%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  position: relative;
-  z-index: 2;
-  animation: fadeUp 0.8s ease 0.3s both;
-}
 
-/* Corner brackets */
-.hero-photo-wrap::before {
-  content: '';
-  position: absolute;
-  top: -10px; left: -10px;
-  width: 40px; height: 40px;
-  border-top: 2px solid var(--acc);
-  border-left: 2px solid var(--acc);
-  z-index: 3;
-  animation: fadeIn 0.6s ease 0.9s both;
-}
 
-.hero-photo-wrap::after {
-  content: '';
-  position: absolute;
-  bottom: -10px; right: -10px;
-  width: 40px; height: 40px;
-  border-bottom: 2px solid var(--acc);
-  border-right: 2px solid var(--acc);
-  z-index: 3;
-  animation: fadeIn 0.6s ease 0.9s both;
-}
 
-/* Offset ghost border */
-.photo-border {
-  position: absolute;
-  top: 12px; left: 12px;
-  right: -12px; bottom: -12px;
-  border: 1px solid rgba(127,119,221,0.25);
-  z-index: 1;
-  animation: fadeIn 0.6s ease 1s both;
-}
 
-/* Scan line */
-.scan-line {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--acc);
-  opacity: 0.6;
-  z-index: 4;
-  animation: scan 1.4s ease 0.3s forwards;
-}
 
-@keyframes scan {
-  0%   { top: 0; opacity: 0.6; }
-  100% { top: 100%; opacity: 0; }
-}
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
 
-/* Text side */
-.hero-text-side {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 
-.hero-tag {
-  display: inline-block;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--teal);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  border-bottom: 1px solid var(--teal);
-  padding-bottom: 3px;
-  opacity: 0;
-  animation: fadeUp 0.6s ease 0.6s forwards;
-}
 
-.hero-text-side h1 {
-  font-size: clamp(28px, 3.2vw, 50px);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-  margin-bottom: 20px;
-  color: var(--bright);
-  opacity: 0;
-  animation: fadeUp 0.6s ease 0.75s forwards;
-}
 
-.hero-text-side h1 em {
-  font-style: normal;
-  color: var(--acc);
-}
 
-.hero-desc {
-  font-size: 15px;
-  color: var(--mid);
-  line-height: 1.75;
-  margin-bottom: 32px;
-  opacity: 0;
-  animation: fadeUp 0.6s ease 0.9s forwards;
-}
 
-.hero-desc strong { color: var(--soft); font-weight: 500; }
 
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  opacity: 0;
-  animation: fadeUp 0.6s ease 1.05s forwards;
-}
 
-.hero-bottom {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-top: 32px;
-  opacity: 0;
-  animation: fadeUp 0.6s ease 1.2s forwards;
-}
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 
-.btn-main {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  padding: 11px 22px;
-  background: var(--acc3);
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  text-decoration: none;
-  transition: background 0.15s;
-}
-.btn-main:hover { background: var(--acc2); }
 
-.btn-line {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  padding: 11px 22px;
-  background: transparent;
-  color: var(--soft);
-  border: 1px solid var(--line2);
-  border-radius: 3px;
-  text-decoration: none;
-  transition: border-color 0.15s, color 0.15s;
-}
-.btn-line:hover { border-color: var(--acc); color: var(--acc); }
 
-.stat-num {
-  font-family: var(--mono);
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--bright);
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 11px;
-  color: var(--dim);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.avail-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--teal);
-  border: 1px solid rgba(95,207,176,0.25);
-  padding: 5px 12px;
-  border-radius: 100px;
-}
-
-.dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--teal);
-  animation: blink 2.2s infinite;
-}
-
-@keyframes blink {
-  0%,100% { opacity:1; }
-  50% { opacity:0.3; }
-}
-
-/* MARQUEE */
-.marquee-wrap {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: 14px 0;
-  overflow: hidden;
-}
-
-.marquee-track {
-  display: flex;
-  gap: 48px;
-  animation: scroll 20s linear infinite;
-  white-space: nowrap;
-  width: max-content;
-}
-
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.marquee-item {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--dim);
-  letter-spacing: 0.06em;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.marquee-item span { color: var(--acc3); font-size: 10px; }
-
-/* SECTIONS */
-.section {
-  padding: 100px 6vw;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.s-label {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--acc3);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-h2 {
-  font-size: clamp(22px, 3vw, 36px);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  margin-bottom: 52px;
-  color: var(--bright);
-}
-
-/* PROJECT */
-.project-block {
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  gap: 32px;
-  padding: 40px 0;
-  border-top: 1px solid var(--line);
-  align-items: start;
-}
-
-.project-block:last-child { border-bottom: 1px solid var(--line); }
-
-.p-index {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--dim);
-  padding-top: 5px;
-}
-
-.p-title {
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: 10px;
-  color: var(--bright);
-  transition: color 0.15s;
-}
-
-.project-block:hover .p-title { color: var(--acc); }
-
-.p-desc {
-  font-size: 14px;
-  color: var(--mid);
-  line-height: 1.7;
-  margin-bottom: 16px;
-  max-width: 640px;
-}
-
-.p-quote {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--acc);
-  margin-bottom: 16px;
-  opacity: 0.8;
-  padding-left: 12px;
-  border-left: 2px solid var(--acc3);
-}
-
-.p-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 16px;
-}
-
-.p-tag {
-  font-size: 11px;
-  font-family: var(--mono);
-  color: var(--soft);
-  background: var(--ink3);
-  border: 1px solid var(--line2);
-  padding: 2px 10px;
-  border-radius: 2px;
-}
-
-.p-link {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--dim);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.p-link:hover { color: var(--acc); }
-
-/* ABOUT */
-.about-cols {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 64px;
-}
-
-.about-body p {
-  font-size: 15px;
-  color: var(--mid);
-  margin-bottom: 20px;
-  line-height: 1.8;
-}
-.about-body strong { color: var(--soft); font-weight: 500; }
-
-.about-aside { display: flex; flex-direction: column; gap: 1px; }
-
-.aside-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.aside-key {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--dim);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.aside-val { font-size: 13px; color: var(--soft); text-align: right; }
-
-/* SKILLS */
-.skill-row {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 24px;
-  align-items: start;
-  padding: 20px 0;
-  border-top: 1px solid var(--line);
-}
-.skill-row:last-child { border-bottom: 1px solid var(--line); }
-
-.sk-cat {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--acc3);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding-top: 3px;
-}
-
-.sk-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-
-.sk-tag { font-size: 13px; color: var(--soft); padding: 4px 0; }
-.sk-tag::after { content: ' ·'; color: var(--dim); }
-.sk-tag:last-child::after { content: ''; }
-
-/* CONTACT */
-.contact-row {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  max-width: 560px;
-}
-
-.c-item {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 24px;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--line);
-  align-items: center;
-  text-decoration: none;
-}
-.c-item:first-child { border-top: 1px solid var(--line); }
-
-.c-key {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--dim);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.c-val { font-size: 14px; color: var(--soft); transition: color 0.15s; }
-.c-item:hover .c-val { color: var(--acc); }
-
-/* FOOTER */
-footer {
-  border-top: 1px solid var(--line);
-  padding: 28px 6vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--dim); }
-
-.footer-links { display: flex; gap: 20px; }
-.footer-links a {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--dim);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.footer-links a:hover { color: var(--soft); }
-
-@media (max-width: 640px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-photo-wrap { width: 200px; margin: 0 auto; }
-  .about-cols { grid-template-columns: 1fr; }
-  .skill-row { grid-template-columns: 1fr; gap: 10px; }
-  .project-block { grid-template-columns: 1fr; gap: 12px; }
-  .nav-right a:not(:last-child) { display: none; }
-}
 </style>
+<style>
+  :root{
+    --bg:oklch(0.17 0.014 265); --bg-2:oklch(0.215 0.016 265); --bg-3:oklch(0.26 0.018 265);
+    --fg:oklch(0.97 0.004 265); --fg-2:oklch(0.735 0.012 265);
+    --line:oklch(0.32 0.018 265);
+    --acc:oklch(0.87 0.19 127); --acc-2:oklch(0.72 0.17 297);
+    --ink:oklch(0.17 0.014 265);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:104px;-webkit-text-size-adjust:100%;background:var(--bg)}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+  ul,ol{padding:0;list-style:none}
+  img{display:block;max-width:100%}
+  a{color:var(--acc);text-decoration-thickness:1px;text-underline-offset:3px}
+  a:hover{color:var(--fg)}
+  button{font:inherit;color:inherit}
+  ::selection{background:oklch(0.87 0.19 127 / 0.28)}
+  :focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:3px}
+  @keyframes nk-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.45;transform:scale(0.82)}}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *{transition-duration:0.001ms !important;animation:none !important}
+  }
+</style>
+
 </head>
 <body>
 
-<nav>
-  <div class="logo">NK<b>_</b></div>
-  <div class="nav-right">
-    <a href="#projects">Projets</a>
-    <a href="#skills">Stack</a>
-    <a href="#about">À propos</a>
-    <a href="#contact">Contact</a>
-    <a href="https://github.com/NADIMKIFOUCHE" target="_blank" style="color:var(--acc3)">GitHub →</a>
-  </div>
-</nav>
+<div data-portfolio="root" style="min-height:100vh;background:var(--bg);overflow-x:hidden">
 
-<section id="hero">
-  <div class="hero-inner">
-    <div class="hero-photo-wrap">
-      <div class="scan-line"></div>
-      <img src="image.png" alt="Nadim Kifouche">
-      <div class="photo-border"></div>
-    </div>
-    <div class="hero-text-side">
-      <div class="hero-tag">Gen AI Engineer</div>
-      <h1>Je construis des systèmes<br>IA qui tiennent <em>en production.</em></h1>
-      <p class="hero-desc">
-        Prototyper un agent LLM, c'est facile. Le rendre <strong>fiable, observable et scalable</strong> —
-        c'est là que ça devient intéressant.
-      </p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn-main">Voir mes projets</a>
-        <a href="#contact" class="btn-line">Me contacter</a>
-      </div>
-      <div class="hero-bottom">
-        <div class="hero-stat">
-          <div class="stat-num" id="age"></div>
-          <div class="stat-label">ans</div>
+  <a href="#projets" data-en="Skip to content" style="position:fixed;left:-9999px;top:0;background:var(--acc);color:var(--ink);padding:12px 18px;border-radius:0 0 10px 0;font:600 14px/1 'Space Grotesk',sans-serif;text-decoration:none;z-index:80" style-focus="left:0">Aller au contenu</a>
+
+  <header style="position:sticky;top:0;z-index:60;background:oklch(0.17 0.014 265 / 0.78);backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid var(--line)">
+    <nav aria-label="Navigation principale" style="max-width:1220px;margin:0 auto;padding:14px clamp(18px,4vw,44px);display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px">
+      <a href="#top" style="display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--fg);margin-right:auto">
+        <span aria-hidden="true" style="width:32px;height:32px;border-radius:11px;background:var(--acc);color:var(--ink);display:grid;place-items:center;font:600 13px/1 'JetBrains Mono',monospace">NK</span>
+        <span style="font:600 16px/1 'Space Grotesk',sans-serif;letter-spacing:-0.02em">Nadim Kifouche</span>
+      </a>
+      <ul style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 24px">
+        <li><a href="#projets" data-navlink="projets" data-en="Projects" style="text-decoration:none;color:var(--fg-2);font:500 14.5px/1 'Space Grotesk',sans-serif;padding:6px 0;border-bottom:2px solid transparent;transition:color 0.2s ease,border-color 0.2s ease" style-hover="color:var(--fg)">Projets</a></li>
+        <li><a href="#parcours" data-navlink="parcours" data-en="Experience" style="text-decoration:none;color:var(--fg-2);font:500 14.5px/1 'Space Grotesk',sans-serif;padding:6px 0;border-bottom:2px solid transparent;transition:color 0.2s ease,border-color 0.2s ease" style-hover="color:var(--fg)">Parcours</a></li>
+        <li><a href="#competences" data-navlink="competences" data-en="Skills" style="text-decoration:none;color:var(--fg-2);font:500 14.5px/1 'Space Grotesk',sans-serif;padding:6px 0;border-bottom:2px solid transparent;transition:color 0.2s ease,border-color 0.2s ease" style-hover="color:var(--fg)">Compétences</a></li>
+        <li><a href="#contact" data-navlink="contact" data-en="Contact" style="text-decoration:none;color:var(--fg-2);font:500 14.5px/1 'Space Grotesk',sans-serif;padding:6px 0;border-bottom:2px solid transparent;transition:color 0.2s ease,border-color 0.2s ease" style-hover="color:var(--fg)">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div role="group" aria-label="Langue / Language" style="display:flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--bg-2)">
+          <button type="button" data-lang-btn="fr" aria-pressed="true" style="border:0;background:var(--acc);color:var(--ink);cursor:pointer;font:500 12px/1 'JetBrains Mono',monospace;padding:7px 11px;border-radius:999px;transition:background 0.2s ease,color 0.2s ease">FR</button>
+          <button type="button" data-lang-btn="en" aria-pressed="false" style="border:0;background:transparent;color:var(--fg-2);cursor:pointer;font:500 12px/1 'JetBrains Mono',monospace;padding:7px 11px;border-radius:999px;transition:background 0.2s ease,color 0.2s ease">EN</button>
         </div>
-        <div style="width:1px;height:32px;background:var(--line2)"></div>
-        <div class="avail-pill"><span class="dot"></span>Disponible</div>
+        <a href="cv-nadim-kifouche.pdf" download="" data-en="CV (PDF)" style="display:inline-flex;align-items:center;gap:8px;background:var(--fg);color:var(--ink);text-decoration:none;font:600 13.5px/1 'Space Grotesk',sans-serif;padding:12px 16px;border-radius:999px;transition:background 0.2s ease,color 0.2s ease" style-hover="background:var(--acc);color:var(--ink)">CV (PDF)</a>
       </div>
-    </div>
-  </div>
-</section>
+    </nav>
+  </header>
 
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item">LangChain <span>✦</span></div>
-    <div class="marquee-item">Multi-Agent Systems <span>✦</span></div>
-    <div class="marquee-item">RAG Pipelines <span>✦</span></div>
-    <div class="marquee-item">FastAPI <span>✦</span></div>
-    <div class="marquee-item">GCP <span>✦</span></div>
-    <div class="marquee-item">LLM Orchestration <span>✦</span></div>
-    <div class="marquee-item">Docker <span>✦</span></div>
-    <div class="marquee-item">Python <span>✦</span></div>
-    <div class="marquee-item">Vertex AI <span>✦</span></div>
-    <div class="marquee-item">Gemini <span>✦</span></div>
-    <div class="marquee-item">SSE Streaming <span>✦</span></div>
-    <div class="marquee-item">Pinecone <span>✦</span></div>
-    <div class="marquee-item">LangGraph <span>✦</span></div>
-    <div class="marquee-item">HuggingFace <span>✦</span></div>
-    <div class="marquee-item">Next.js <span>✦</span></div>
-    <div class="marquee-item">BigQuery <span>✦</span></div>
-    <div class="marquee-item">LangChain <span>✦</span></div>
-    <div class="marquee-item">Multi-Agent Systems <span>✦</span></div>
-    <div class="marquee-item">RAG Pipelines <span>✦</span></div>
-    <div class="marquee-item">FastAPI <span>✦</span></div>
-    <div class="marquee-item">GCP <span>✦</span></div>
-    <div class="marquee-item">LLM Orchestration <span>✦</span></div>
-    <div class="marquee-item">Docker <span>✦</span></div>
-    <div class="marquee-item">Python <span>✦</span></div>
-    <div class="marquee-item">Vertex AI <span>✦</span></div>
-    <div class="marquee-item">Gemini <span>✦</span></div>
-    <div class="marquee-item">SSE Streaming <span>✦</span></div>
-    <div class="marquee-item">Pinecone <span>✦</span></div>
-    <div class="marquee-item">LangGraph <span>✦</span></div>
-    <div class="marquee-item">HuggingFace <span>✦</span></div>
-    <div class="marquee-item">Next.js <span>✦</span></div>
-    <div class="marquee-item">BigQuery <span>✦</span></div>
-  </div>
+  <main id="top">
+
+    <section aria-label="Présentation" style="position:relative;max-width:1220px;margin:0 auto;padding:clamp(44px,7vw,96px) clamp(18px,4vw,44px) clamp(48px,7vw,88px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:center;gap:clamp(32px,5vw,72px)">
+        <div style="min-width:0">
+          <p style="display:inline-flex;align-items:center;gap:11px;border:1px solid oklch(0.87 0.19 127 / 0.4);background:oklch(0.87 0.19 127 / 0.1);color:var(--acc);border-radius:999px;padding:9px 16px 9px 13px;font:500 13px/1.2 'JetBrains Mono',monospace">
+            <span aria-hidden="true" style="width:8px;height:8px;border-radius:999px;background:var(--acc);flex:none;animation:nk-pulse 2.4s ease-in-out infinite"></span>
+            <span data-en="Available from October 2026 · Permanent role · Paris region or remote">Disponible dès octobre 2026 · CDI · Île-de-France ou remote</span>
+          </p>
+          <h1 style="font:700 clamp(52px,9.6vw,116px)/0.88 'Bricolage Grotesque','Space Grotesk',sans-serif;letter-spacing:-0.045em;margin:26px 0 0">Nadim<br>Kifouche</h1>
+          <p style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:22px 0 0">
+            <span style="font:600 clamp(20px,2.4vw,27px)/1.2 'Space Grotesk',sans-serif;letter-spacing:-0.02em;color:var(--fg)">AI Engineer</span>
+            <span aria-hidden="true" style="width:26px;height:1px;background:var(--line)"></span>
+            <span data-en="LLM agents · RAG · Full-stack" style="font:400 14px/1.4 'JetBrains Mono',monospace;color:var(--acc-2)">Agents LLM · RAG · Full-stack</span>
+          </p>
+          <p data-en="I build complete AI applications — architecture, backend, interface and deployment. Currently an AI Engineer at JEMS and in the final year of a Master's in AI &amp; Software Engineering, I am building an end-to-end SaaS product alongside." style="font:400 clamp(16.5px,1.35vw,18.5px)/1.62 'Space Grotesk',sans-serif;color:var(--fg-2);margin:26px 0 0;max-width:54ch;text-wrap:pretty">Je conçois des applications d’IA complètes — architecture, backend, interface et déploiement. Actuellement AI Engineer chez JEMS et en dernière année de Master IA &amp; Génie logiciel, je construis en parallèle un produit SaaS de bout en bout.</p>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:36px 0 0">
+            <a href="#contact" data-en="Get in touch" style="display:inline-flex;align-items:center;gap:9px;background:var(--acc);color:var(--ink);text-decoration:none;font:600 15px/1 'Space Grotesk',sans-serif;padding:16px 24px;border-radius:999px;transition:transform 0.2s ease,box-shadow 0.2s ease" style-hover="color:var(--ink);transform:translateY(-2px);box-shadow:0 12px 28px -14px oklch(0.87 0.19 127 / 0.6)">Me contacter</a>
+            <a href="cv-nadim-kifouche.pdf" download="" data-en="Download CV" style="display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);color:var(--fg);text-decoration:none;font:600 15px/1 'Space Grotesk',sans-serif;padding:15px 23px;border-radius:999px;transition:border-color 0.2s ease,background 0.2s ease" style-hover="border-color:var(--fg);background:var(--bg-2)">Télécharger le CV</a>
+            <a href="https://github.com/NADIMKIFOUCHE" target="_blank" rel="noopener" style="color:var(--fg-2);text-decoration:none;font:400 13.5px/1 'JetBrains Mono',monospace;padding:15px 6px" style-hover="color:var(--acc)">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/nadim-kifouche/" target="_blank" rel="noopener" style="color:var(--fg-2);text-decoration:none;font:400 13.5px/1 'JetBrains Mono',monospace;padding:15px 6px" style-hover="color:var(--acc)">LinkedIn ↗</a>
+          </div>
+        </div>
+        <figure style="margin:0;justify-self:center;width:100%;max-width:380px">
+          <div style="position:relative;aspect-ratio:4 / 5;border-radius:22px;overflow:hidden;background:repeating-linear-gradient(135deg,var(--bg-3) 0 9px,var(--bg-2) 9px 18px);box-shadow:0 40px 80px -50px oklch(0 0 0 / 0.9),0 0 0 1px var(--line)">
+            <img src="image.png" alt="Portrait de Nadim Kifouche" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <div aria-hidden="true" style="max-width:1220px;margin:0 auto;padding:0 clamp(18px,4vw,44px)"><div style="height:1px;background:linear-gradient(90deg,var(--acc) 0%,var(--line) 22%,var(--line) 100%)"></div></div>
+
+    <section id="projets" data-screen-label="Projets" style="max-width:1220px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(18px,4vw,44px)">
+      <div data-reveal="1" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px 40px">
+        <div>
+          <p data-en="01 / Projects" style="font:500 12.5px/1 'JetBrains Mono',monospace;letter-spacing:0.16em;text-transform:uppercase;color:var(--acc)">01 / Projets</p>
+          <h2 data-en="Selected work" style="font:600 clamp(36px,5.4vw,60px)/1 'Bricolage Grotesque','Space Grotesk',sans-serif;letter-spacing:-0.035em;margin:16px 0 0">Projets</h2>
+        </div>
+      </div>
+
+      <ul data-reveal="1" style="margin:clamp(28px,3.4vw,40px) 0 0;border-top:1px solid var(--line)">
+
+        <li data-row="p1" style="border-bottom:1px solid var(--line)">
+          <div style="width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px clamp(12px,1.6vw,24px);border-left:2px solid var(--acc);padding:15px 14px;text-align:left;color:var(--fg)">
+            <span style="flex:0 0 46px;font:500 12px/1 'JetBrains Mono',monospace;color:var(--acc)">2026</span>
+            <span data-en="SaaS platform" style="flex:0 1 auto;font:600 17.5px/1.25 'Space Grotesk',sans-serif;letter-spacing:-0.02em">Plateforme SaaS</span>
+            <span data-en="Confidential" style="flex:0 0 auto;font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:0.07em;text-transform:uppercase;color:var(--acc);border:1px solid oklch(0.87 0.19 127 / 0.4);background:oklch(0.87 0.19 127 / 0.1);border-radius:999px;padding:5px 9px">Confidentiel</span>
+            <span data-en="Solo · two apps · AI agents at the core" style="flex:1 1 180px;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:var(--fg-2)">Porté seul · deux apps · agents IA au cœur</span>
+          </div>
+          <div style="display:block;padding:0 14px 24px 16px;border-left:2px solid var(--acc)">
+            <p data-en="A consumer SaaS product led solo, from concept to product: two applications cooperating on a shared foundation, AI agents built into the core of the experience and a complete business cycle (accounts, payments, notifications). Name and scope will be shared at launch." style="font:400 16px/1.65 'Space Grotesk',sans-serif;color:var(--fg-2);max-width:74ch;text-wrap:pretty">Produit SaaS grand public porté seul, de la conception au produit : deux applications qui coopèrent sur une base commune, agents IA intégrés au cœur de l’expérience et cycle métier complet (comptes, paiements, notifications). Nom et périmètre communiqués au lancement.</p>
+            <ul style="display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 0">
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Next.js</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">FastAPI</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">PostgreSQL/PostGIS</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Agents LLM</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Alembic</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Docker</li>
+              <li data-en="In development" style="font:500 12px/1 'JetBrains Mono',monospace;color:var(--acc-2);border:1px solid oklch(0.72 0.17 297 / 0.45);border-radius:7px;padding:7px 10px">En développement</li>
+            </ul>
+            <p data-en="Details on request during interview" style="font:400 13px/1.5 'JetBrains Mono',monospace;color:var(--fg-2);margin:18px 0 0">Détails sur demande en entretien</p>
+          </div>
+        </li>
+
+        <li data-row="p2" style="border-bottom:1px solid var(--line)">
+          <div style="width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px clamp(12px,1.6vw,24px);border-left:2px solid var(--acc-2);padding:15px 14px;text-align:left;color:var(--fg)">
+            <span style="flex:0 0 46px;font:500 12px/1 'JetBrains Mono',monospace;color:var(--acc-2)">2026</span>
+            <span style="flex:0 1 auto;font:600 17.5px/1.25 'Space Grotesk',sans-serif;letter-spacing:-0.02em">Compagnon Expert Cloud</span>
+            <span data-en="Internship — JEMS" style="flex:0 0 auto;font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:0.07em;text-transform:uppercase;color:var(--acc-2);border:1px solid oklch(0.72 0.17 297 / 0.45);background:oklch(0.72 0.17 297 / 0.12);border-radius:999px;padding:5px 9px">Stage — JEMS</span>
+            <span data-en="Three agents · RAG · Vertex AI · GCP" style="flex:1 1 180px;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:var(--fg-2)">Trois agents · RAG · Vertex AI · GCP</span>
+          </div>
+          <div style="display:block;padding:0 14px 24px 16px;border-left:2px solid var(--acc-2)">
+            <p data-en="POC of an AI assistant for Google Cloud, designed to relieve experts of repetitive work (log analysis, tech watch, recurring questions). Three agents: autonomous alerting grounded in the team's documentation, a documentation chatbot (RAG) and a dashboard generator — with LLM model arbitration to keep costs under control. Taken through to demo and to the client sales process." style="font:400 16px/1.65 'Space Grotesk',sans-serif;color:var(--fg-2);max-width:74ch;text-wrap:pretty">POC d’assistant IA pour Google Cloud, conçu pour décharger les experts des tâches répétitives (analyse de logs, veille, questions récurrentes). Trois agents : alerting autonome appuyé sur la documentation de l’équipe, chatbot documentaire (RAG) et générateur de dashboards — avec un arbitrage des modèles LLM pour maîtriser les coûts. Mené jusqu’à la démonstration et au processus de vente client.</p>
+            <ul style="display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 0">
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">LangGraph</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Gemini/Vertex AI</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">pgvector</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">BigQuery</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Cloud Scheduler</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">FastAPI · SSE</li>
+            </ul>
+            <p data-en="Company project, private code" style="font:400 13px/1.5 'JetBrains Mono',monospace;color:var(--fg-2);margin:18px 0 0">Projet d’entreprise, code privé</p>
+          </div>
+        </li>
+
+        <li data-row="p3" style="border-bottom:1px solid var(--line)">
+          <div style="width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px clamp(12px,1.6vw,24px);border-left:2px solid transparent;padding:15px 14px;text-align:left;color:var(--fg)">
+            <span style="flex:0 0 46px;font:500 12px/1 'JetBrains Mono',monospace;color:var(--fg-2)">2026</span>
+            <span data-en="VAE Assistant" style="flex:0 1 auto;font:600 17.5px/1.25 'Space Grotesk',sans-serif;letter-spacing:-0.02em">Assistant VAE</span>
+            <span data-en="Diagnostic chatbot · SSE streaming · JWT" style="flex:1 1 180px;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:var(--fg-2)">Chatbot de diagnostic · streaming SSE · JWT</span>
+          </div>
+          <div style="display:block;padding:0 14px 24px 16px;border-left:2px solid var(--line)">
+            <p data-en="Diagnostic chatbot for electric bikes: two sequential agents (information gathering, then costed diagnosis), token-by-token SSE streaming, JWT authentication, photo upload and a complete file sent automatically to the workshop." style="font:400 16px/1.65 'Space Grotesk',sans-serif;color:var(--fg-2);max-width:74ch;text-wrap:pretty">Chatbot de diagnostic pour vélos électriques : deux agents séquentiels (collecte d’informations, puis diagnostic chiffré), streaming SSE token par token, authentification JWT, upload de photos et dossier complet envoyé automatiquement à l’atelier.</p>
+            <ul style="display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 0">
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">LangGraph</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Gemini</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Next.js</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">FastAPI</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">PostgreSQL</li>
+            </ul>
+            <a href="https://github.com/NADIMKIFOUCHE/chatbot-vae-artisanat-public" target="_blank" rel="noopener" data-en="View code ↗" style="display:inline-block;margin:18px 0 0;font:600 13.5px/1 'Space Grotesk',sans-serif;color:var(--acc);text-decoration:none" style-hover="color:var(--fg)">Voir le code ↗</a>
+          </div>
+        </li>
+
+        <li data-row="p4" style="border-bottom:1px solid var(--line)">
+          <div style="width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px clamp(12px,1.6vw,24px);border-left:2px solid transparent;padding:15px 14px;text-align:left;color:var(--fg)">
+            <span style="flex:0 0 46px;font:500 12px/1 'JetBrains Mono',monospace;color:var(--fg-2)">2026</span>
+            <span style="flex:0 1 auto;font:600 17.5px/1.25 'Space Grotesk',sans-serif;letter-spacing:-0.02em">MatchCV</span>
+            <span data-en="Recruitment RAG · embeddings · vector search" style="flex:1 1 180px;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:var(--fg-2)">RAG recrutement · embeddings · recherche vectorielle</span>
+          </div>
+          <div style="display:block;padding:0 14px 24px 16px;border-left:2px solid var(--line)">
+            <p data-en="Recruitment RAG pipeline: the job offer is parsed by an LLM (skills, seniority, role), compared against a CV database using semantic embeddings and PostgreSQL vector search, then an agent validates and explains every shortlisted candidate." style="font:400 16px/1.65 'Space Grotesk',sans-serif;color:var(--fg-2);max-width:74ch;text-wrap:pretty">Pipeline RAG de recrutement : l’offre d’emploi est parsée par un LLM (compétences, séniorité, rôle), comparée à une base de CV par embeddings sémantiques et recherche vectorielle PostgreSQL, puis un agent valide et explique chaque candidat retenu.</p>
+            <ul style="display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 0">
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Python</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Groq</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">MiniLM</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">PostgreSQL</li>
+            </ul>
+            <a href="https://github.com/NADIMKIFOUCHE/match-cv" target="_blank" rel="noopener" data-en="View code ↗" style="display:inline-block;margin:18px 0 0;font:600 13.5px/1 'Space Grotesk',sans-serif;color:var(--acc);text-decoration:none" style-hover="color:var(--fg)">Voir le code ↗</a>
+          </div>
+        </li>
+
+        <li data-row="p6" style="border-bottom:1px solid var(--line)">
+          <div style="width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px clamp(12px,1.6vw,24px);border-left:2px solid transparent;padding:15px 14px;text-align:left;color:var(--fg)">
+            <span style="flex:0 0 46px;font:500 12px/1 'JetBrains Mono',monospace;color:var(--fg-2)">2024</span>
+            <span data-en="GPU convolution — CUDA" style="flex:0 1 auto;font:600 17.5px/1.25 'Space Grotesk',sans-serif;letter-spacing:-0.02em">Convolution GPU — CUDA</span>
+            <span data-en="Global vs shared memory · measured speedups" style="flex:1 1 180px;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:var(--fg-2)">Mémoire globale vs shared · speedups mesurés</span>
+          </div>
+          <div style="display:block;padding:0 14px 24px 16px;border-left:2px solid var(--line)">
+            <p data-en="Convolution filters in CUDA C++, benchmarked: global memory vs shared memory, speedups measured by kernel size (3×3, 5×5, 7×7) and block configuration." style="font:400 16px/1.65 'Space Grotesk',sans-serif;color:var(--fg-2);max-width:74ch;text-wrap:pretty">Filtres de convolution en CUDA C++, benchmarkés : mémoire globale vs shared memory, speedups mesurés selon la taille du noyau (3×3, 5×5, 7×7) et la configuration de blocs.</p>
+            <ul style="display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 0">
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">CUDA</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">C++</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Benchmarking</li>
+            </ul>
+            <a href="https://github.com/NADIMKIFOUCHE/CUDA_Cpp_2024" target="_blank" rel="noopener" data-en="View code ↗" style="display:inline-block;margin:18px 0 0;font:600 13.5px/1 'Space Grotesk',sans-serif;color:var(--acc);text-decoration:none" style-hover="color:var(--fg)">Voir le code ↗</a>
+          </div>
+        </li>
+
+        <li data-row="p7" style="border-bottom:1px solid var(--line)">
+          <div style="width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px clamp(12px,1.6vw,24px);border-left:2px solid transparent;padding:15px 14px;text-align:left;color:var(--fg)">
+            <span style="flex:0 0 46px;font:500 12px/1 'JetBrains Mono',monospace;color:var(--fg-2)">2023</span>
+            <span data-en="C++ parallelism" style="flex:0 1 auto;font:600 17.5px/1.25 'Space Grotesk',sans-serif;letter-spacing:-0.02em">Parallélisme C++</span>
+            <span data-en="SIMD · OpenMP · MPI" style="flex:1 1 180px;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:var(--fg-2)">SIMD · OpenMP · MPI</span>
+          </div>
+          <div style="display:block;padding:0 14px 24px 16px;border-left:2px solid var(--line)">
+            <p data-en="Three levels of parallelism: SIMD (SSE), multithreading (OpenMP on digital terrain models) and distributed computing (MPI, grid simulation with master/workers)." style="font:400 16px/1.65 'Space Grotesk',sans-serif;color:var(--fg-2);max-width:74ch;text-wrap:pretty">Trois niveaux de parallélisme : SIMD (SSE), multithreading (OpenMP sur modèles numériques de terrain) et calcul distribué (MPI, simulation sur grille maître/esclaves).</p>
+            <ul style="display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 0">
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">C++</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">MPI</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">OpenMP</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">SSE</li>
+            </ul>
+            <a href="https://github.com/NADIMKIFOUCHE/MPI_OpenMP_C_2023" target="_blank" rel="noopener" data-en="View code ↗" style="display:inline-block;margin:18px 0 0;font:600 13.5px/1 'Space Grotesk',sans-serif;color:var(--acc);text-decoration:none" style-hover="color:var(--fg)">Voir le code ↗</a>
+          </div>
+        </li>
+
+        <li data-row="p8" style="border-bottom:1px solid var(--line)">
+          <div style="width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px clamp(12px,1.6vw,24px);border-left:2px solid transparent;padding:15px 14px;text-align:left;color:var(--fg)">
+            <span style="flex:0 0 46px;font:500 12px/1 'JetBrains Mono',monospace;color:var(--fg-2)">2023</span>
+            <span style="flex:0 1 auto;font:600 17.5px/1.25 'Space Grotesk',sans-serif;letter-spacing:-0.02em">Othello &amp; Awalé</span>
+            <span data-en="Java · shared MVC · artificial player" style="flex:1 1 180px;font:400 12.5px/1.5 'JetBrains Mono',monospace;color:var(--fg-2)">Java · MVC partagé · joueur artificiel</span>
+          </div>
+          <div style="display:block;padding:0 14px 24px 16px;border-left:2px solid var(--line)">
+            <p data-en="Two board games in Java, shared MVC architecture, artificial player and human vs machine games. The foundations: OOP, inheritance, separation of concerns." style="font:400 16px/1.65 'Space Grotesk',sans-serif;color:var(--fg-2);max-width:74ch;text-wrap:pretty">Deux jeux de plateau en Java, architecture MVC partagée, joueur artificiel et parties humain vs machine. Les fondations : POO, héritage, séparation des responsabilités.</p>
+            <ul style="display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 0">
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">Java</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">MVC</li>
+              <li style="font:400 12px/1 'JetBrains Mono',monospace;color:var(--fg-2);border:1px solid var(--line);border-radius:7px;padding:7px 10px">POO</li>
+            </ul>
+            <a href="https://github.com/NADIMKIFOUCHE/Othello_Awale_Java_2023" target="_blank" rel="noopener" data-en="View code ↗" style="display:inline-block;margin:18px 0 0;font:600 13.5px/1 'Space Grotesk',sans-serif;color:var(--acc);text-decoration:none" style-hover="color:var(--fg)">Voir le code ↗</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="parcours" data-screen-label="Parcours" style="border-top:1px solid var(--line);background:oklch(0.195 0.015 265)">
+      <div style="max-width:1220px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(18px,4vw,44px)">
+        <div data-reveal="1">
+          <p data-en="02 / Experience &amp; education" style="font:500 12.5px/1 'JetBrains Mono',monospace;letter-spacing:0.16em;text-transform:uppercase;color:var(--acc-2)">02 / Parcours</p>
+          <h2 data-en="Experience &amp; education" style="font:600 clamp(36px,5.4vw,60px)/1 'Bricolage Grotesque','Space Grotesk',sans-serif;letter-spacing:-0.035em;margin:16px 0 0">Parcours</h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(32px,4vw,64px);margin:clamp(32px,4vw,52px) 0 0">
+
+          <div data-reveal="1">
+            <h3 data-en="Experience" style="font:500 12.5px/1 'JetBrains Mono',monospace;letter-spacing:0.14em;text-transform:uppercase;color:var(--acc);padding-bottom:14px;border-bottom:1px solid var(--line)">Expériences</h3>
+            <ol style="display:grid;gap:0;margin:26px 0 0;border-left:1px solid var(--line);padding-left:clamp(20px,2.4vw,30px)">
+              <li style="position:relative;padding:0 0 30px">
+                <span aria-hidden="true" style="position:absolute;left:calc(-1 * clamp(20px,2.4vw,30px) - 5px);top:6px;width:9px;height:9px;border-radius:999px;background:var(--acc);box-shadow:0 0 0 4px oklch(0.195 0.015 265)"></span>
+                <p data-en="2026 — today" style="font:500 12.5px/1 'JetBrains Mono',monospace;color:var(--acc)">2026 — aujourd’hui</p>
+                <h4 data-en="AI Engineer (intern)" style="font:600 clamp(19px,2vw,23px)/1.25 'Space Grotesk',sans-serif;letter-spacing:-0.02em;margin:11px 0 0">AI Engineer (stagiaire)</h4>
+                <p style="font:400 13.5px/1.4 'JetBrains Mono',monospace;color:var(--fg-2);margin:7px 0 0">JEMS · Levallois-Perret</p>
+                <p data-en="End-to-end design of Compagnon Expert Cloud: multi-agent architecture, RAG pipeline, GCP integration, through to demo and the client sales process." style="font:400 15.5px/1.62 'Space Grotesk',sans-serif;color:var(--fg-2);margin:12px 0 0;max-width:52ch;text-wrap:pretty">Conception de bout en bout de Compagnon Expert Cloud : architecture multi-agents, pipeline RAG, intégration GCP, jusqu’à la démonstration et au processus de vente client.</p>
+              </li>
+              <li style="position:relative">
+                <span aria-hidden="true" style="position:absolute;left:calc(-1 * clamp(20px,2.4vw,30px) - 5px);top:6px;width:9px;height:9px;border-radius:999px;background:var(--bg-3);border:1px solid var(--line);box-shadow:0 0 0 4px oklch(0.195 0.015 265)"></span>
+                <p style="font:500 12.5px/1 'JetBrains Mono',monospace;color:var(--fg-2)">2024</p>
+                <h4 data-en="Data Engineer (intern)" style="font:600 clamp(19px,2vw,23px)/1.25 'Space Grotesk',sans-serif;letter-spacing:-0.02em;margin:11px 0 0">Data Engineer (stagiaire)</h4>
+                <p style="font:400 13.5px/1.4 'JetBrains Mono',monospace;color:var(--fg-2);margin:7px 0 0">EY · Paris La Défense</p>
+                <p data-en="ETL/ELT pipelines with Airflow, large-volume processing with Spark (firewall logs via SIEM), data warehouse modelling and dashboards." style="font:400 15.5px/1.62 'Space Grotesk',sans-serif;color:var(--fg-2);margin:12px 0 0;max-width:52ch;text-wrap:pretty">Pipelines ETL/ELT avec Airflow, traitement de gros volumes avec Spark (logs pare-feu via SIEM), modélisation en data warehouse et dashboards.</p>
+              </li>
+            </ol>
+          </div>
+
+          <div data-reveal="1">
+            <h3 data-en="Education" style="font:500 12.5px/1 'JetBrains Mono',monospace;letter-spacing:0.14em;text-transform:uppercase;color:var(--acc-2);padding-bottom:14px;border-bottom:1px solid var(--line)">Cursus scolaire</h3>
+            <ol style="display:grid;gap:0;margin:26px 0 0;border-left:1px solid var(--line);padding-left:clamp(20px,2.4vw,30px)">
+              <li style="position:relative;padding:0 0 30px">
+                <span aria-hidden="true" style="position:absolute;left:calc(-1 * clamp(20px,2.4vw,30px) - 5px);top:6px;width:9px;height:9px;border-radius:999px;background:var(--acc-2);box-shadow:0 0 0 4px oklch(0.195 0.015 265)"></span>
+                <p style="font:500 12.5px/1 'JetBrains Mono',monospace;color:var(--acc-2)">2024 — 2026</p>
+                <h4 data-en="Master's in Artificial Intelligence &amp; Software Engineering" style="font:600 clamp(19px,2vw,23px)/1.25 'Space Grotesk',sans-serif;letter-spacing:-0.02em;margin:11px 0 0">Master Intelligence Artificielle &amp; Génie logiciel</h4>
+                <p data-en="University of Orléans" style="font:400 13.5px/1.4 'JetBrains Mono',monospace;color:var(--fg-2);margin:7px 0 0">Université d’Orléans</p>
+              </li>
+              <li style="position:relative">
+                <span aria-hidden="true" style="position:absolute;left:calc(-1 * clamp(20px,2.4vw,30px) - 5px);top:6px;width:9px;height:9px;border-radius:999px;background:var(--bg-3);border:1px solid var(--line);box-shadow:0 0 0 4px oklch(0.195 0.015 265)"></span>
+                <p style="font:500 12.5px/1 'JetBrains Mono',monospace;color:var(--fg-2)">2021 — 2024</p>
+                <h4 data-en="Bachelor's in Computer Science" style="font:600 clamp(19px,2vw,23px)/1.25 'Space Grotesk',sans-serif;letter-spacing:-0.02em;margin:11px 0 0">Licence Informatique</h4>
+                <p data-en="University of Orléans" style="font:400 13.5px/1.4 'JetBrains Mono',monospace;color:var(--fg-2);margin:7px 0 0">Université d’Orléans</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="competences" data-screen-label="Compétences" style="border-top:1px solid var(--line);max-width:1220px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(18px,4vw,44px)">
+      <div data-reveal="1">
+        <p data-en="03 / Skills" style="font:500 12.5px/1 'JetBrains Mono',monospace;letter-spacing:0.16em;text-transform:uppercase;color:var(--acc)">03 / Compétences</p>
+        <h2 data-en="Skills" style="font:600 clamp(36px,5.4vw,60px)/1 'Bricolage Grotesque','Space Grotesk',sans-serif;letter-spacing:-0.035em;margin:16px 0 0">Compétences</h2>
+      </div>
+      <dl data-reveal="1" style="margin:clamp(32px,4vw,52px) 0 0;border-top:1px solid var(--line)">
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:10px clamp(24px,4vw,56px);padding:26px 2px;border-bottom:1px solid var(--line)">
+          <dt data-en="AI &amp; LLMs" style="flex:0 0 190px;font:500 12.5px/1.4 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:var(--acc)">IA &amp; LLMs</dt>
+          <dd style="flex:1 1 340px;margin:0;font:400 clamp(16px,1.4vw,18px)/1.75 'Space Grotesk',sans-serif;color:var(--fg);text-wrap:pretty">LangChain · LangGraph · Gemini / Vertex AI · HuggingFace · RAG / pgvector · Prompt engineering</dd>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:10px clamp(24px,4vw,56px);padding:26px 2px;border-bottom:1px solid var(--line)">
+          <dt data-en="Backend &amp; Data" style="flex:0 0 190px;font:500 12.5px/1.4 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:var(--acc-2)">Backend &amp; Data</dt>
+          <dd style="flex:1 1 340px;margin:0;font:400 clamp(16px,1.4vw,18px)/1.75 'Space Grotesk',sans-serif;color:var(--fg);text-wrap:pretty">FastAPI · Spring Boot · SQLAlchemy · PostgreSQL / PostGIS · Alembic · BigQuery · Airflow · Spark</dd>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:10px clamp(24px,4vw,56px);padding:26px 2px;border-bottom:1px solid var(--line)">
+          <dt data-en="High-performance computing" style="flex:0 0 190px;font:500 12.5px/1.4 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:var(--acc)">Calcul haute performance</dt>
+          <dd style="flex:1 1 340px;margin:0;font:400 clamp(16px,1.4vw,18px)/1.75 'Space Grotesk',sans-serif;color:var(--fg);text-wrap:pretty">CUDA · MPI · OpenMP</dd>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:10px clamp(24px,4vw,56px);padding:26px 2px;border-bottom:1px solid var(--line)">
+          <dt data-en="Cloud, DevOps &amp; Front" style="flex:0 0 190px;font:500 12.5px/1.4 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:var(--acc-2)">Cloud, DevOps &amp; Front</dt>
+          <dd style="flex:1 1 340px;margin:0;font:400 clamp(16px,1.4vw,18px)/1.75 'Space Grotesk',sans-serif;color:var(--fg);text-wrap:pretty">GCP · Docker · GitHub Actions · React / Next.js · Tailwind CSS</dd>
+        </div>
+      </dl>
+<p style="font:400 13px/1.7 'JetBrains Mono',monospace;color:var(--fg-2);opacity:0.6;margin:20px 2px 0"><a href="https://github.com/NADIMKIFOUCHE" target="_blank" rel="noopener" data-en="Other secondary skills — browse my GitHub ↗" style="color:inherit;text-decoration:none" style-hover="color:var(--acc)">Autres compétences secondaires — parcourir mon GitHub ↗</a></p>
+    </section>
+
+    <section id="contact" data-screen-label="Contact" style="border-top:1px solid var(--line);background:oklch(0.195 0.015 265)">
+      <div style="max-width:1220px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(18px,4vw,44px)">
+        <div data-reveal="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:clamp(28px,4vw,56px);align-items:start">
+          <div>
+            <p data-en="04 / Contact" style="font:500 12.5px/1 'JetBrains Mono',monospace;letter-spacing:0.16em;text-transform:uppercase;color:var(--acc)">04 / Contact</p>
+            <h2 data-en="Let's talk" style="font:600 clamp(36px,5.4vw,60px)/1 'Bricolage Grotesque','Space Grotesk',sans-serif;letter-spacing:-0.035em;margin:16px 0 0">Parlons-en</h2>
+            <p data-en="Available from October 2026 for a permanent role in the Paris region or remote. The fastest way to reach me is email." style="font:400 17px/1.62 'Space Grotesk',sans-serif;color:var(--fg-2);margin:18px 0 0;max-width:42ch;text-wrap:pretty">Disponible dès octobre 2026 pour un CDI en Île-de-France ou en remote. Le plus direct reste l’email.</p>
+            <a href="mailto:nadim.kifouche@gmail.com" style="display:inline-block;font:600 clamp(19px,2.6vw,28px)/1.2 'Space Grotesk',sans-serif;letter-spacing:-0.02em;color:var(--acc);text-decoration:none;margin:26px 0 0;border-bottom:2px solid oklch(0.87 0.19 127 / 0.4);padding-bottom:5px;transition:border-color 0.2s ease" style-hover="color:var(--acc);border-color:var(--acc)">nadim.kifouche@gmail.com</a>
+          </div>
+          <ul style="display:grid;gap:12px">
+            <li><a href="https://www.linkedin.com/in/nadim-kifouche/" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--bg-2);border:1px solid var(--line);border-radius:16px;padding:20px 22px;text-decoration:none;color:var(--fg);transition:border-color 0.25s ease,transform 0.25s ease" style-hover="border-color:var(--acc);transform:translateX(4px);color:var(--fg)"><span><span style="display:block;font:500 11.5px/1 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-2)">LinkedIn</span><span style="display:block;font:600 16.5px/1.3 'Space Grotesk',sans-serif;margin-top:8px">in/nadim-kifouche</span></span><span aria-hidden="true" style="font:400 17px/1 'JetBrains Mono',monospace;color:var(--acc)">↗</span></a></li>
+            <li><a href="https://github.com/NADIMKIFOUCHE" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--bg-2);border:1px solid var(--line);border-radius:16px;padding:20px 22px;text-decoration:none;color:var(--fg);transition:border-color 0.25s ease,transform 0.25s ease" style-hover="border-color:var(--acc);transform:translateX(4px);color:var(--fg)"><span><span style="display:block;font:500 11.5px/1 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-2)">GitHub</span><span style="display:block;font:600 16.5px/1.3 'Space Grotesk',sans-serif;margin-top:8px">NADIMKIFOUCHE</span></span><span aria-hidden="true" style="font:400 17px/1 'JetBrains Mono',monospace;color:var(--acc)">↗</span></a></li>
+            <li><a href="tel:+33695009086" style="display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--bg-2);border:1px solid var(--line);border-radius:16px;padding:20px 22px;text-decoration:none;color:var(--fg);transition:border-color 0.25s ease,transform 0.25s ease" style-hover="border-color:var(--acc);transform:translateX(4px);color:var(--fg)"><span><span data-en="Phone" style="display:block;font:500 11.5px/1 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-2)">Téléphone</span><span style="display:block;font:600 16.5px/1.3 'Space Grotesk',sans-serif;margin-top:8px">+33 6 95 00 90 86</span></span><span aria-hidden="true" style="font:400 17px/1 'JetBrains Mono',monospace;color:var(--acc)">↗</span></a></li>
+            <li><a href="cv-nadim-kifouche.pdf" download="" style="display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--acc);border:1px solid var(--acc);border-radius:16px;padding:20px 22px;text-decoration:none;color:var(--ink);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="color:var(--ink);transform:translateX(4px);box-shadow:0 14px 30px -18px oklch(0.87 0.19 127 / 0.7)"><span><span data-en="Résumé" style="display:block;font:500 11.5px/1 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;opacity:0.7">CV</span><span data-en="Download the PDF" style="display:block;font:600 16.5px/1.3 'Space Grotesk',sans-serif;margin-top:8px">Télécharger le PDF</span></span><span aria-hidden="true" style="font:400 17px/1 'JetBrains Mono',monospace">↓</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top:1px solid var(--line);background:var(--bg)">
+    <div style="max-width:1220px;margin:0 auto;padding:28px clamp(18px,4vw,44px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px">
+      <p style="font:400 13px/1.5 'JetBrains Mono',monospace;color:var(--fg-2)">© 2026 Nadim Kifouche</p>
+      <p data-en="AI Engineer · Available from October 2026" style="font:400 13px/1.5 'JetBrains Mono',monospace;color:var(--fg-2)">AI Engineer · Disponible dès octobre 2026</p>
+      <a href="#top" data-en="Back to top ↑" style="font:400 13px/1.5 'JetBrains Mono',monospace;color:var(--fg-2);text-decoration:none" style-hover="color:var(--acc)">Haut de page ↑</a>
+    </div>
+  </footer>
 </div>
 
-<div class="section" id="projects">
-  <div class="s-label">Projets</div>
-  <h2>Ce que j'ai construit</h2>
-
-  <div class="project-block">
-    <div class="p-index">001</div>
-    <div>
-      <div class="p-title">Système Multi-Agents</div>
-      <p class="p-desc">
-        Architecture agentique complète — coordination entre agents spécialisés, routage dynamique
-        de tâches, pipelines de décision autonome et tool-calling.
-        Focus sur la robustesse des décisions et la traçabilité des actions à chaque étape.
-      </p>
-      <div class="p-quote">La coordination inter-agents est triviale à prototyper, difficile à rendre déterministe.</div>
-      <div class="p-tags">
-        <span class="p-tag">Python</span>
-        <span class="p-tag">LangChain</span>
-        <span class="p-tag">Agents</span>
-        <span class="p-tag">Tool-calling</span>
-        <span class="p-tag">LLMs</span>
-      </div>
-      <a href="https://github.com/NADIMKIFOUCHE/Systeme_multi_agent_test" target="_blank" class="p-link">github.com/NADIMKIFOUCHE →</a>
-    </div>
-  </div>
-
-  <div class="project-block">
-    <div class="p-index">002</div>
-    <div>
-      <div class="p-title">VAE Assistant</div>
-      <p class="p-desc">
-        Assistant conversationnel IA de bout en bout pour le diagnostic de vélos à assistance électrique.
-        Pipeline à deux agents séquentiels (LangChain / LangGraph sur Google Vertex AI Gemini) :
-        le premier collecte les informations, le second établit le diagnostic et chiffre la réparation.
-        Streaming SSE token par token, authentification JWT, historique persisté, upload de photos,
-        et envoi automatique d'un dossier HTML complet à l'atelier.
-      </p>
-      <div class="p-quote">Du message au devis — diagnostic structuré, estimation de coût, transmis à l'artisan en quelques échanges.</div>
-      <div class="p-tags">
-        <span class="p-tag">Next.js</span>
-        <span class="p-tag">FastAPI</span>
-        <span class="p-tag">LangGraph</span>
-        <span class="p-tag">Vertex AI</span>
-        <span class="p-tag">Gemini 2.5</span>
-        <span class="p-tag">SSE Streaming</span>
-        <span class="p-tag">PostgreSQL</span>
-        <span class="p-tag">Docker Compose</span>
-        <span class="p-tag">JWT</span>
-        <span class="p-tag">TypeScript</span>
-        <span class="p-tag">Tailwind CSS</span>
-      </div>
-      <a href="https://github.com/NADIMKIFOUCHE/chatbot-vae" target="_blank" class="p-link">github.com/NADIMKIFOUCHE →</a>
-    </div>
-  </div>
-</div>
-
-<div class="section" id="about" style="border-top:1px solid var(--line);">
-  <div class="s-label">À propos</div>
-  <h2>Qui suis-je ?</h2>
-  <div class="about-cols">
-    <div class="about-body">
-      <p>
-        J'ai <span id="age2"></span> ans et je suis passionné par les systèmes IA qui fonctionnent vraiment.
-        Mon obsession : aller au-delà du prototype — concevoir des architectures
-        <strong>multi-agents robustes</strong>, des pipelines RAG efficaces,
-        des systèmes qu'on peut déployer et maintenir sans tout reconstruire.
-      </p>
-      <p>
-        En dehors du code : sport, défis techniques, et curiosité permanente
-        pour tout ce qui bouge dans l'écosystème LLM.
-      </p>
-    </div>
-    <div class="about-aside">
-      <div class="aside-row">
-        <span class="aside-key">Formation</span>
-        <span class="aside-val">M2 ARIAS · Orléans</span>
-      </div>
-      <div class="aside-row">
-        <span class="aside-key">Lieu</span>
-        <span class="aside-val">France</span>
-      </div>
-      <div class="aside-row">
-        <span class="aside-key">Focus</span>
-        <span class="aside-val">LLMs · Agents · RAG</span>
-      </div>
-      <div class="aside-row">
-        <span class="aside-key">Statut</span>
-        <span class="aside-val" style="color:var(--teal)">Disponible</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="section" id="skills" style="border-top:1px solid var(--line); padding-top:80px;">
-  <div class="s-label">Stack</div>
-  <h2>Technologies</h2>
-  <div>
-    <div class="skill-row">
-      <div class="sk-cat">AI & LLMs</div>
-      <div class="sk-tags">
-        <span class="sk-tag">LangChain</span>
-        <span class="sk-tag">LangGraph</span>
-        <span class="sk-tag">LlamaIndex</span>
-        <span class="sk-tag">OpenAI</span>
-        <span class="sk-tag">Anthropic</span>
-        <span class="sk-tag">Vertex AI</span>
-        <span class="sk-tag">Gemini</span>
-        <span class="sk-tag">Groq</span>
-        <span class="sk-tag">HuggingFace</span>
-        <span class="sk-tag">Ollama</span>
-      </div>
-    </div>
-    <div class="skill-row">
-      <div class="sk-cat">Backend</div>
-      <div class="sk-tags">
-        <span class="sk-tag">Python</span>
-        <span class="sk-tag">FastAPI</span>
-        <span class="sk-tag">Flask</span>
-        <span class="sk-tag">SQLAlchemy</span>
-        <span class="sk-tag">SSE Streaming</span>
-        <span class="sk-tag">JWT</span>
-        <span class="sk-tag">PostgreSQL</span>
-        <span class="sk-tag">MongoDB</span>
-        <span class="sk-tag">BigQuery</span>
-        <span class="sk-tag">Pinecone</span>
-        <span class="sk-tag">Redis</span>
-      </div>
-    </div>
-    <div class="skill-row">
-      <div class="sk-cat">Cloud & DevOps</div>
-      <div class="sk-tags">
-        <span class="sk-tag">GCP</span>
-        <span class="sk-tag">Docker</span>
-        <span class="sk-tag">Kubernetes</span>
-        <span class="sk-tag">GitHub Actions</span>
-        <span class="sk-tag">Terraform</span>
-        <span class="sk-tag">MLflow</span>
-      </div>
-    </div>
-    <div class="skill-row">
-      <div class="sk-cat">Frontend</div>
-      <div class="sk-tags">
-        <span class="sk-tag">React</span>
-        <span class="sk-tag">TypeScript</span>
-        <span class="sk-tag">Next.js</span>
-        <span class="sk-tag">Tailwind CSS</span>
-        <span class="sk-tag">framer-motion</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="section" id="contact" style="border-top:1px solid var(--line); padding-top:80px;">
-  <div class="s-label">Contact</div>
-  <h2>Travaillons ensemble</h2>
-  <p style="color:var(--mid); margin-bottom:40px; max-width:440px; font-size:15px;">
-    Ouvert aux opportunités en IA générative, systèmes agentiques ou MLOps.
-  </p>
-  <div class="contact-row">
-    <a href="mailto:nadim.kifouche@gmail.com" class="c-item">
-      <span class="c-key">Email</span>
-      <span class="c-val">nadim.kifouche@gmail.com</span>
-    </a>
-    <a href="https://linkedin.com/in/nadimkifouche" target="_blank" class="c-item">
-      <span class="c-key">LinkedIn</span>
-      <span class="c-val">linkedin.com/in/nadimkifouche</span>
-    </a>
-    <a href="https://github.com/NADIMKIFOUCHE" target="_blank" class="c-item">
-      <span class="c-key">GitHub</span>
-      <span class="c-val">github.com/NADIMKIFOUCHE</span>
-    </a>
-    <a href="tel:+33695009086" class="c-item">
-      <span class="c-key">Téléphone</span>
-      <span class="c-val">+33 6 95 00 90 86</span>
-    </a>
-  </div>
-</div>
-
-<footer>
-  <span class="footer-copy">© 2026 Nadim Kifouche</span>
-  <div class="footer-links">
-    <a href="https://github.com/NADIMKIFOUCHE" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/nadimkifouche" target="_blank">LinkedIn</a>
-    <a href="mailto:nadim.kifouche@gmail.com">Email</a>
-  </div>
-</footer>
 
 <script>
-  const birth = new Date(2001, 3, 6);
-  const today = new Date();
-  let age = today.getFullYear() - birth.getFullYear();
-  const m = today.getMonth() - birth.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
-  document.getElementById('age').textContent = age;
-  document.getElementById('age2').textContent = age;
+// style-hover (l'export vient d'un runtime qui gérait ces attributs)
+document.querySelectorAll('[style-hover]').forEach((el) => {
+  const base = el.getAttribute('style') || '';
+  const hov  = el.getAttribute('style-hover');
+  el.addEventListener('mouseenter', () => el.setAttribute('style', base + ';' + hov));
+  el.addEventListener('mouseleave', () => el.setAttribute('style', base));
+});
+// Bascule FR / EN via les attributs data-en
+const frBtn = document.querySelector('[data-lang-btn="fr"]');
+const enBtn = document.querySelector('[data-lang-btn="en"]');
+function setLang(en) {
+  document.querySelectorAll('[data-en]').forEach((el) => {
+    if (el.children.length) return;                    // texte pur uniquement
+    if (!el.dataset.fr) el.dataset.fr = el.textContent;
+    el.textContent = en ? el.getAttribute('data-en') : el.dataset.fr;
+  });
+  if (frBtn && enBtn) {
+    const on  = "border:0;background:var(--acc);color:var(--ink);cursor:pointer;font:500 12px/1 'JetBrains Mono',monospace;padding:7px 11px;border-radius:999px";
+    const off = "border:0;background:transparent;color:var(--fg-2);cursor:pointer;font:500 12px/1 'JetBrains Mono',monospace;padding:7px 11px;border-radius:999px";
+    frBtn.setAttribute('style', en ? off : on);
+    enBtn.setAttribute('style', en ? on : off);
+    frBtn.setAttribute('aria-pressed', String(!en));
+    enBtn.setAttribute('aria-pressed', String(en));
+    document.documentElement.lang = en ? 'en' : 'fr';
+  }
+}
+frBtn && frBtn.addEventListener('click', () => setLang(false));
+enBtn && enBtn.addEventListener('click', () => setLang(true));
 </script>
 </body>
 </html>
